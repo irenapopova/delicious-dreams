@@ -1,0 +1,19 @@
+{
+  "name": "delicious-dreams",
+  "version": "1.0.0",
+  "description": "stores",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irenapopova/delicious-dreams.git"
+  },
+  "author": "irena popova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irenapopova/delicious-dreams/issues"
+  },
+  "homepage": "https://github.com/irenapopova/delicious-dreams#readme"
+}

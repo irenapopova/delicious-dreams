@@ -20,22 +20,23 @@ const app = express();
 app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
 app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work great too
 
-// app.use shows that I am using middleware
+//! app.use shows that I am using middleware
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Exposes a bunch of methods for validating data. Used heavily on userController.validateRegister
+// bodyParser.urlencoded means anytime somebody submits data via a form tag what will happen is that i will get that data that has been submitted on my req.body and it is all going to be url encoded, and I do not have to worry about dissecting it from the request at all. That is part of express bodyParser package. 
+//
+// Exposes a bunch of methods for validating data and email stuff. Used heavily on userController.validateRegister
 app.use(expressValidator());
 
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser());
 
 
-// Sessions allow us to store data on visitors from request to request, how long they stay logged, 
+// Sessions allow us to store data on visitors from request to request, how long they have been  logged in, (their logged in state) any info I need to go from request to request, all that is going to be stored in the session. Sessions are stored in MongoDB Database, 
 // This keeps users logged in and allows us to send flash messages
 app.use(session({
   secret: process.env.SECRET,
@@ -53,9 +54,10 @@ app.use(passport.session());
 //  The flash middleware let's us use req.flash('error', 'Shit!'), which will then pass that message to the next page the user requests
 app.use(flash());
 
+// below this middleware will give me all of my local helpers, 
 // pass variables to our templates + all requests
 app.use((req, res, next) => {
-  res.locals.h = helpers;
+  res.locals.h = helpers; // that is what allowes me to use the local variavle H i used
   res.locals.flashes = req.flash();
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
@@ -69,20 +71,23 @@ app.use((req, res, next) => {
 });
 
 // After all that above middleware, i finally handle my own routes!
-app.use('/', routes);
+app.use('/', routes); // injection routers 
 
+// if there is no routers found, then it is just going to keep moving on to the next middleware
 // If that above routes didn't work, i 404 them and forward to error handler
 app.use(errorHandlers.notFound);
 
 // One of the error handlers will see if these errors are just validation errors
 app.use(errorHandlers.flashValidationErrors);
 
+// if I am in development 
 // Otherwise this was a really bad error i didn't expect! Shoot 
 if (app.get('env') === 'development') {
-  /* Development Error Handler - Prints stack trace */
+  /* Development Error Handler - Prints/shows the stack trace, all the info about what is happened */
   app.use(errorHandlers.developmentErrors);
 }
 
+// in production I do not want to show the user "Oh, there is an error that happened on this line of code"
 // production error handler
 app.use(errorHandlers.productionErrors);
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// telling mongoose that the Promise to use is the global (using the built-in ES6 Promise)
 mongoose.Promise = global.Promise;
 const slug = require('slug');
 
@@ -9,7 +10,7 @@ const storeSchema = new mongoose.Schema({
     required: 'Please enter a store name!'
 
   },
-
+  //using slug library 
   slug: String,
   description: {
     type: String,
@@ -17,4 +18,4 @@ const storeSchema = new mongoose.Schema({
   },
   tags: [String]
 });
-module.exports = mongoose.model('store', storeSchema);
+module.exports = mongoose.model('Store', storeSchema);

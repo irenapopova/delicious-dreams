@@ -14,8 +14,15 @@ const storeSchema = new mongoose.Schema({
   slug: String,
   description: {
     type: String,
-    type: true
+    trim: true
   },
   tags: [String]
 });
+
+storeSchema.pre('save', function (next {
+  this.slug = slug(this.name);
+next();
+});
+
+
 module.exports = mongoose.model('Store', storeSchema);

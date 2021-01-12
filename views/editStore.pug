@@ -1,0 +1,12 @@
+extends layout 
+
+//- keep one mixin to one file
+include mixins/_storeForm
+
+block content 
+.inner
+h2= title
++storeForm({name: 'Irie'})  
+ //- h2 You are on page #{title}
+
+//- plus tells pug that I am using a mixin and running the function here

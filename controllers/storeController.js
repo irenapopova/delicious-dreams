@@ -23,9 +23,16 @@ exports.addStore = (req, res) => {
 //middleWare allows to run code after the request but before response
 
 exports.createStore = async (req, res) => {
-  const store = new Store(req.body);
-  await store.save();
-  request.flash('success', `Successfully created ` ${ store.name }.Care to leave a Review ?);
-  rest.redirect('/');
+  const store = await (new Store(req.body)).save();
+  req.flash('success', `Successfully created ${store.name}. Care to leave a Review ?`);
 
+  res.redirect(`/`store / ${ store.slug }`);
+
+}; 
+
+exports.getStore = async (req,res) => {
+  // 1. Query the database for a list of all stores
+  const stores = await Store.find();
+  console.log(stores);
+  res.render('stores', {title: 'Stores', stores});
 };

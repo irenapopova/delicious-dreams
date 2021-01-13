@@ -8,3 +8,4 @@ Users can filter restaurants based on tags
 Users can login / logout to modify their submissions
 Users can leave reviews for restaurants
 Sample Data
+mongodb+srv://delicious-dreams:dreams6@delicious-dreams.0scu4.mongodb.net/<dbname>?retryWrites=true&w=majority

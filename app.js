@@ -12,7 +12,8 @@ const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
-
+const dotenv = require('dotenv')
+dotenv.config()
 // create my Express app
 const app = express();
 

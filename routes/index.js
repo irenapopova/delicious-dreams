@@ -8,7 +8,7 @@ router.get('/', storeController.getStores);
 router.get('/stores', storeController.getStores);
 router.get('/add', storeController.getStore);
 router.post('/add', catchErrors(storeController.createStore));
-
+router.get('/stores/:id/edit', catchErrors(storeController.editStore))
 
 /* router.get('/', storeController.middleWare, storeController.homePage); */
 

@@ -12,9 +12,9 @@ const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
-const dotenv = require('dotenv')
-dotenv.config()
-// create my Express app
+
+
+// create Express app
 const app = express();
 
 // view engine setup
@@ -47,8 +47,8 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
-//
-//  Passport JS is what we use to handle our logins
+
+//  Passport JS is what is used to handle the logins
 app.use(passport.initialize());
 app.use(passport.session());
 

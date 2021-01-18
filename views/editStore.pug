@@ -4,9 +4,9 @@ extends layout
 include mixins/_storeForm
 
 block content 
-.inner
-h2= title
-+storeForm({name: 'Irie'})  
+    .inner
+      h2= title
+        +storeForm({store})  
  //- h2 You are on page #{title}
 
 //- plus tells pug that I am using a mixin and running the function here

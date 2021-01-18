@@ -49,3 +49,32 @@ exports.createStore = (req, res) => {
   res.send(reverse);
 }) */
 ```
+
+
+storeController.js
+```js
+// req -is the data that comes in (user signs in with <form>  and POSTs to /login)
+// res is the data that comes out and in between the req & res a bunch of work must happen
+/* export.myMiddleware = (req, res, next) => {
+  req.name = 'irena';
+
+  next(); // 
+}; */
+```
+store.js
+```js
+/* storeSchema.pre('save', function (next {
+  if(!this.isModified('name')){
+  next(); // skip it 
+    return; // stop this function from running
+}
+  this.slug = slug(this.name);
+next();
+
+// TODO make more resiliant so slugs are unique
+ });*/
+```
+
+// all is sequencial 
+// Modals are where the Data is going to be stored , and before I can  actually create a piece of data, I am going to be able to create stores. Before i CAN CREATE A PIECE OF DATA i need to  describe what that data will look like. The simplest way I can put it in ahead of time.
+// i am doing everything in strict mode so I have to define my schema beforehand. 

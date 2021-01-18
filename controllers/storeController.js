@@ -1,18 +1,11 @@
-// req -is the data that comes in (user signs in with <form>  and POSTs to /login)
-// res is the data that comes out and in between the req & res a bunch of work must happen
-/* export.myMiddleware = (req, res, next) => {
-  req.name = 'irena';
-
-  next(); // 
-}; */
 const mongoose = require('mongoose');
-const { request } = require('../app');
+/* const { request } = require('../app'); */
 const Store = mongoose.model('Store');
 
 exports.homePage = (req, res) => {
   console.log(req.name);
   req.flash('error', 'Something happened');
-  req.flash('info', 'Something happaned');
+  req.flash('info', 'Something happened');
   req.flash('warning', 'Something happened');
   res.render('index');
 };
@@ -33,7 +26,7 @@ exports.createStore = async (req, res) => {
 exports.getStores = async (req, res) => {
   // 1. Query the database for a list of all stores
   const stores = await Store.find();
-  console.log(stores);
+  /* console.log(stores); */
   res.render('stores', { title: 'Stores', stores });
 };
 
@@ -46,10 +39,11 @@ exports.editStore = async (req, res) => {
   res.render('editStore', { title: `Edit ${store.name}`, store });
 };
 
-express.updateStore = async (req, res) => {
+exports.updateStore = async (req, res) => {
   // find and update store 
   const store = Store.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,
     runValidators: true
-  })
+  }).exec();
+  req.flash('success', `Successfully updated <strong>${store.name}</strong>. <a href="/store/${stores.slug}">View Store </a>`);
 };

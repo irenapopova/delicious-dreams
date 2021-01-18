@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv')
-dotenv.config()
+
+
 // Make sure to run updated node version  7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
 if (major < 7 || (major === 7 && minor <= 5)) {
@@ -9,8 +9,8 @@ if (major < 7 || (major === 7 && minor <= 5)) {
 }
 
 // import environmental variables from the variables.env file
-/* require('dotenv').config({ path: 'variables.env' });
- */
+require('dotenv').config({ path: 'variables.env' });
+
 // Connect to Database and handle any bad connections
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
